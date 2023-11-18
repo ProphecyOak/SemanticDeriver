@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d0r5i7v04ufmk"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Input" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2

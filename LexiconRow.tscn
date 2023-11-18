@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://dln44hvb0uotf"]
+
+[ext_resource type="PackedScene" uid="uid://d0r5i7v04ufmk" path="res://LambdaInput.tscn" id="1_knvra"]
+
+[node name="Lexicon Row" type="ColorRect"]
+custom_minimum_size = Vector2(50, 60)
+offset_bottom = 50.0
+color = Color(0.258824, 0.588235, 0.509804, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextEdit" type="TextEdit" parent="ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+editable = false
+context_menu_enabled = false
+
+[node name="Input" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_knvra")]
+layout_mode = 2
+
+[node name="Input2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_knvra")]
+layout_mode = 2
+
+[node name="Input3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_knvra")]
+layout_mode = 2
