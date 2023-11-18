@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://dln44hvb0uotf"]
+[gd_scene load_steps=2 format=3 uid="uid://dln44hvb0uotf"]
 
-[ext_resource type="PackedScene" uid="uid://d0r5i7v04ufmk" path="res://Components/LambdaInput.tscn" id="1_1o70q"]
 [ext_resource type="Script" path="res://Scripts/LexiconRow.gd" id="1_hf4ry"]
 
 [node name="Lexicon Row" type="ColorRect"]
@@ -26,17 +25,9 @@ vertical_scroll_mode = 0
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TextEdit" type="LineEdit" parent="ScrollContainer/HBoxContainer"]
+[node name="Name" type="LineEdit" parent="ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
-editable = false
 context_menu_enabled = false
 
-[node name="Input" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_1o70q")]
-layout_mode = 2
-
-[node name="Input2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_1o70q")]
-layout_mode = 2
-
-[node name="Input3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_1o70q")]
-layout_mode = 2
+[connection signal="text_changed" from="ScrollContainer/HBoxContainer/Name" to="." method="textChanged"]
