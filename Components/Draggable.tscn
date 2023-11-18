@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi3x0wbngsa4p"]
+
+[ext_resource type="Script" path="res://Scripts/Draggable.gd" id="1_m5m3o"]
+
+[node name="Draggable" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_m5m3o")
