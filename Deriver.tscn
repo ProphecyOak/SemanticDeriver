@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://byxx5c0qe8wjb"]
+[gd_scene load_steps=6 format=3 uid="uid://byxx5c0qe8wjb"]
 
 [ext_resource type="Script" path="res://Scripts/Lexicon.gd" id="1_hw508"]
 [ext_resource type="PackedScene" uid="uid://3415d76gmrl4" path="res://Components/SyntaxNode.tscn" id="1_x6rf1"]
 [ext_resource type="PackedScene" uid="uid://dln44hvb0uotf" path="res://Components/LexiconRow.tscn" id="2_lvuea"]
+[ext_resource type="Script" path="res://Scripts/NodeButtons.gd" id="4_p8fh7"]
+[ext_resource type="ButtonGroup" uid="uid://x1y3l8646kty" path="res://Components/NodeButtons.tres" id="4_wj4ka"]
 
 [node name="Deriver" type="Control"]
 layout_mode = 3
@@ -88,3 +90,30 @@ offset_top = 20.0
 offset_right = 30.0
 offset_bottom = 650.0
 grow_horizontal = 2
+script = ExtResource("4_p8fh7")
+
+[node name="Button" type="Button" parent="Tabs/Panel/NodeButtons"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("4_wj4ka")
+text = "Create"
+
+[node name="Button2" type="Button" parent="Tabs/Panel/NodeButtons"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = ExtResource("4_wj4ka")
+text = "Move"
+
+[node name="Button3" type="Button" parent="Tabs/Panel/NodeButtons"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = ExtResource("4_wj4ka")
+text = "Destroy"
+
+[connection signal="pressed" from="Tabs/Panel/NodeButtons/Button" to="Tabs/Panel/NodeButtons" method="onClick" binds= ["Create"]]
+[connection signal="pressed" from="Tabs/Panel/NodeButtons/Button2" to="Tabs/Panel/NodeButtons" method="onClick" binds= ["Move"]]
+[connection signal="pressed" from="Tabs/Panel/NodeButtons/Button3" to="Tabs/Panel/NodeButtons" method="onClick" binds= ["Destroy"]]

@@ -7,4 +7,3 @@ func newRow(node):
 	row.syntaxNode = node
 	add_child(row)
 	return row
-
