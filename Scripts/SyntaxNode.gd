@@ -14,7 +14,7 @@ func _ready():
 	label = $Label/Name
 	if root:
 		lexEntry = lexicon.newRow(self)
-		lexEntry.get_node("ScrollContainer/HBoxContainer/Name").text = "S"
+		lexEntry.get_node("MarginContainer/HBoxContainer/Name").text = "S"
 		$Label/Name.text = "S"
 
 func addChild(node = null,panel=null):
@@ -55,9 +55,9 @@ func deleteNode():
 		else:
 			child.deleteNode()
 	Global.nodeTexts.erase($"Label/Name")
-	lexEntry.queue_free()
+	lexEntry.deleteNode()
 	queue_free()
 
 
 func labelChanged(new_text):
-	lexEntry.get_node("ScrollContainer/HBoxContainer/Name").text = new_text
+	lexEntry.get_node("Name").text = new_text

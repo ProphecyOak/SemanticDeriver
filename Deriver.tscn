@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://byxx5c0qe8wjb"]
+[gd_scene load_steps=7 format=3 uid="uid://byxx5c0qe8wjb"]
 
 [ext_resource type="Script" path="res://Scripts/Lexicon.gd" id="1_hw508"]
 [ext_resource type="PackedScene" uid="uid://3415d76gmrl4" path="res://Components/SyntaxNode.tscn" id="1_x6rf1"]
 [ext_resource type="PackedScene" uid="uid://dln44hvb0uotf" path="res://Components/LexiconRow.tscn" id="2_lvuea"]
+[ext_resource type="Script" path="res://Scripts/LexicalEditor.gd" id="4_0o3ol"]
 [ext_resource type="Script" path="res://Scripts/NodeButtons.gd" id="4_p8fh7"]
 [ext_resource type="ButtonGroup" uid="uid://x1y3l8646kty" path="res://Components/NodeButtons.tres" id="4_wj4ka"]
 
@@ -16,8 +17,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Tabs" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(1150, 0)
+[node name="Panels" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,25 +26,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="Lexicon" type="Panel" parent="Tabs"]
-custom_minimum_size = Vector2(500, 650)
+[node name="LexiconPanel" type="PanelContainer" parent="Panels"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Tabs/Lexicon"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -10.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ScrollContainer" type="ScrollContainer" parent="Panels/LexiconPanel"]
+layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="Entries" type="VBoxContainer" parent="Tabs/Lexicon/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panels/LexiconPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="Entries" type="VBoxContainer" parent="Panels/LexiconPanel/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -52,47 +52,73 @@ theme_override_constants/separation = 10
 script = ExtResource("1_hw508")
 lexRow = ExtResource("2_lvuea")
 
-[node name="Syntax" type="Panel" parent="Tabs"]
+[node name="CenterPanel" type="VBoxContainer" parent="Panels"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Tabs/Syntax"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SyntaxPanel" type="PanelContainer" parent="Panels/CenterPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panels/CenterPanel/SyntaxPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panels/CenterPanel/SyntaxPanel/MarginContainer"]
+layout_mode = 2
 horizontal_scroll_mode = 2
 vertical_scroll_mode = 2
 
-[node name="Root" parent="Tabs/Syntax/ScrollContainer" node_paths=PackedStringArray("lexicon") instance=ExtResource("1_x6rf1")]
+[node name="Root" parent="Panels/CenterPanel/SyntaxPanel/MarginContainer/ScrollContainer" node_paths=PackedStringArray("lexicon") instance=ExtResource("1_x6rf1")]
 layout_mode = 2
 size_flags_horizontal = 6
 root = true
 packedNode = ExtResource("1_x6rf1")
-lexicon = NodePath("../../../Lexicon/ScrollContainer/Entries")
+lexicon = NodePath("../../../../../LexiconPanel/ScrollContainer/MarginContainer/Entries")
 
-[node name="Panel" type="Panel" parent="Tabs"]
+[node name="Lexical Editor" type="PanelContainer" parent="Panels/CenterPanel"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+script = ExtResource("4_0o3ol")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panels/CenterPanel/Lexical Editor"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panels/CenterPanel/Lexical Editor/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonPanel" type="PanelContainer" parent="Panels"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="NodeButtons" type="VBoxContainer" parent="Tabs/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -30.0
-offset_top = 20.0
-offset_right = 30.0
-offset_bottom = 650.0
-grow_horizontal = 2
+[node name="MarginContainer" type="MarginContainer" parent="Panels/ButtonPanel"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="NodeButtons" type="VBoxContainer" parent="Panels/ButtonPanel/MarginContainer"]
+layout_mode = 2
 script = ExtResource("4_p8fh7")
 
-[node name="Button" type="Button" parent="Tabs/Panel/NodeButtons"]
+[node name="Button" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -100,28 +126,28 @@ button_pressed = true
 button_group = ExtResource("4_wj4ka")
 text = "Create"
 
-[node name="Button2" type="Button" parent="Tabs/Panel/NodeButtons"]
+[node name="Button2" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_group = ExtResource("4_wj4ka")
 text = "Move"
 
-[node name="Button3" type="Button" parent="Tabs/Panel/NodeButtons"]
+[node name="Button3" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_group = ExtResource("4_wj4ka")
 text = "Destroy"
 
-[node name="Button4" type="Button" parent="Tabs/Panel/NodeButtons"]
+[node name="Button4" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_group = ExtResource("4_wj4ka")
 text = "Edit"
 
-[connection signal="pressed" from="Tabs/Panel/NodeButtons/Button" to="Tabs/Panel/NodeButtons" method="onClick" binds= ["Create"]]
-[connection signal="pressed" from="Tabs/Panel/NodeButtons/Button2" to="Tabs/Panel/NodeButtons" method="onClick" binds= ["Move"]]
-[connection signal="pressed" from="Tabs/Panel/NodeButtons/Button3" to="Tabs/Panel/NodeButtons" method="onClick" binds= ["Destroy"]]
-[connection signal="pressed" from="Tabs/Panel/NodeButtons/Button4" to="Tabs/Panel/NodeButtons" method="onClick" binds= ["Edit"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Create"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button2" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Move"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button3" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Destroy"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button4" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Edit"]]

@@ -8,6 +8,9 @@ var panels = []
 var nodeTexts = []
 var editMode = "Create"
 
+func _ready():
+	DisplayServer.window_set_min_size(Vector2(700,350))
+
 func onEnterDragSpot(node):
 	spotMousedOver = node
 
@@ -57,9 +60,9 @@ func _process(_delta):
 				nodeHolding.get_parent().remove_child(nodeHolding)
 				spotMousedOver.addChild(nodeHolding,panelOver)
 				nodeHolding.get_node("Draggable").release()
+			triggerPanels(false)
 		if editMode == "Exchange" and holding:
 			pass #TO ADD POTENTIALLY??
-		triggerPanels(false)
 
 func changeEditMode(mode):
 	editMode = mode
