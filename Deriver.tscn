@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://byxx5c0qe8wjb"]
+[gd_scene load_steps=9 format=3 uid="uid://byxx5c0qe8wjb"]
 
 [ext_resource type="Script" path="res://Scripts/Lexicon.gd" id="1_hw508"]
 [ext_resource type="PackedScene" uid="uid://3415d76gmrl4" path="res://Components/SyntaxNode.tscn" id="1_x6rf1"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/LexicalEditor.gd" id="4_0o3ol"]
 [ext_resource type="Script" path="res://Scripts/NodeButtons.gd" id="4_p8fh7"]
 [ext_resource type="ButtonGroup" uid="uid://x1y3l8646kty" path="res://Components/NodeButtons.tres" id="4_wj4ka"]
+[ext_resource type="CodeHighlighter" uid="uid://dobiu8j76jp67" path="res://Components/TopLineHighlighter.tres" id="5_cvmf3"]
+[ext_resource type="Script" path="res://Scripts/TopLine.gd" id="5_mh30b"]
 
 [node name="Deriver" type="Control"]
 layout_mode = 3
@@ -89,6 +91,7 @@ script = ExtResource("4_0o3ol")
 [node name="MarginContainer" type="MarginContainer" parent="Panels/CenterPanel/Lexical Editor"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 20
 
@@ -99,6 +102,18 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="TextEdit" type="TextEdit" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+context_menu_enabled = false
+syntax_highlighter = ExtResource("5_cvmf3")
+script = ExtResource("5_mh30b")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer"]
 layout_mode = 2

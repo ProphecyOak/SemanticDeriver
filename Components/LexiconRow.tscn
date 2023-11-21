@@ -37,12 +37,14 @@ alignment = 1
 [node name="Show" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "V"
 
 [node name="Delete" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "X"
 

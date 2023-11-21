@@ -60,4 +60,4 @@ func deleteNode():
 
 
 func labelChanged(new_text):
-	lexEntry.get_node("Name").text = new_text
+	lexEntry.get_node("MarginContainer/HBoxContainer/Name").text = new_text
