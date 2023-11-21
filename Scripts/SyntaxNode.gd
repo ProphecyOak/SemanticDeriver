@@ -1,4 +1,5 @@
 extends Control
+class_name SyntaxNode
 
 @export var root = false
 @export var packedNode: PackedScene
@@ -16,6 +17,7 @@ func _ready():
 		lexEntry = lexicon.newRow(self)
 		lexEntry.get_node("MarginContainer/HBoxContainer/Name").text = "S"
 		$Label/Name.text = "S"
+		Deriver.SyntaxRoot = self
 
 func addChild(node = null,panel=null):
 	if branches < 2 or panel in [1,2]:
@@ -61,3 +63,10 @@ func deleteNode():
 
 func labelChanged(new_text):
 	lexEntry.get_node("MarginContainer/HBoxContainer/Name").text = new_text
+
+func getNodeChildren():
+	var out = []
+	for x in $Children.get_children():
+		if x.name not in ["1","2"]:
+			out.append(x)
+	return out

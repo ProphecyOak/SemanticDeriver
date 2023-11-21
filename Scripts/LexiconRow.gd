@@ -1,10 +1,11 @@
 extends ColorRect
 class_name LexiconRow
 
-var syntaxNode: Control
+var syntaxNode: SyntaxNode
 var editor: Control
 
 var variables = {}
+var lexText = ""
 
 
 func textChanged(new_text):

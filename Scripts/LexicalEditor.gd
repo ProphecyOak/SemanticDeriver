@@ -9,6 +9,7 @@ func _ready():
 
 func showEntry(x):
 	curEntry = x
+	topLine.text = x.lexText
 	visible = true
 
 func hideEntry():

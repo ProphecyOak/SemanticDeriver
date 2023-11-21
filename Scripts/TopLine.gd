@@ -19,3 +19,7 @@ func updateEntry():
 	for newMatch in regex.search_all(text):
 		Lexicon.curEntry.variables[newMatch.get_string(1)] = newMatch.get_string(2)
 	print(Lexicon.curEntry.variables)
+
+
+func textChanged():
+	Lexicon.curEntry.lexText = text

@@ -2,6 +2,9 @@ extends VBoxContainer
 
 @export var lexRow: PackedScene
 
+func _ready():
+	Deriver.Lexicon = self
+
 func newRow(node):
 	var row = lexRow.instantiate()
 	row.syntaxNode = node

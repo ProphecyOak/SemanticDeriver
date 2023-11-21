@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://byxx5c0qe8wjb"]
+[gd_scene load_steps=12 format=3 uid="uid://byxx5c0qe8wjb"]
 
 [ext_resource type="Script" path="res://Scripts/Lexicon.gd" id="1_hw508"]
 [ext_resource type="PackedScene" uid="uid://3415d76gmrl4" path="res://Components/SyntaxNode.tscn" id="1_x6rf1"]
@@ -8,6 +8,13 @@
 [ext_resource type="ButtonGroup" uid="uid://x1y3l8646kty" path="res://Components/NodeButtons.tres" id="4_wj4ka"]
 [ext_resource type="CodeHighlighter" uid="uid://dobiu8j76jp67" path="res://Components/TopLineHighlighter.tres" id="5_cvmf3"]
 [ext_resource type="Script" path="res://Scripts/TopLine.gd" id="5_mh30b"]
+[ext_resource type="Script" path="res://Scripts/CopyDerivation.gd" id="7_ug3ac"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hq8o"]
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m35xt"]
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
 
 [node name="Deriver" type="Control"]
 layout_mode = 3
@@ -119,6 +126,20 @@ script = ExtResource("5_mh30b")
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Derived" type="Label" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2hq8o")
+theme_override_styles/focus = SubResource("StyleBoxFlat_m35xt")
+text = "COPY"
+script = ExtResource("7_ug3ac")
+
 [node name="ButtonPanel" type="PanelContainer" parent="Panels"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -133,7 +154,7 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 script = ExtResource("4_p8fh7")
 
-[node name="Button" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
+[node name="Create" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -141,28 +162,36 @@ button_pressed = true
 button_group = ExtResource("4_wj4ka")
 text = "Create"
 
-[node name="Button2" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
+[node name="Move" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_group = ExtResource("4_wj4ka")
 text = "Move"
 
-[node name="Button3" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
+[node name="Destroy" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_group = ExtResource("4_wj4ka")
 text = "Destroy"
 
-[node name="Button4" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
+[node name="Edit" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_group = ExtResource("4_wj4ka")
 text = "Edit"
 
-[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Create"]]
-[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button2" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Move"]]
-[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button3" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Destroy"]]
-[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Button4" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Edit"]]
+[node name="Derive" type="Button" parent="Panels/ButtonPanel/MarginContainer/NodeButtons"]
+layout_mode = 2
+focus_mode = 0
+text = "Derive"
+
+[connection signal="text_changed" from="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/TextEdit" to="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/TextEdit" method="textChanged"]
+[connection signal="pressed" from="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer2/Button" to="Panels/CenterPanel/Lexical Editor/MarginContainer/VBoxContainer/HBoxContainer2/Button" method="copy"]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Create" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Create"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Move" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Move"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Destroy" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Destroy"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Edit" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="onClick" binds= ["Edit"]]
+[connection signal="pressed" from="Panels/ButtonPanel/MarginContainer/NodeButtons/Derive" to="Panels/ButtonPanel/MarginContainer/NodeButtons" method="derive"]
