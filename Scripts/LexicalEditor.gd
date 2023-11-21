@@ -21,5 +21,3 @@ func _input(_event):
 		if topLine.has_focus():
 			get_viewport().set_input_as_handled()
 			topLine.updateEntry()
-		else:
-			print("ENTER")

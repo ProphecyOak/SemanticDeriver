@@ -6,6 +6,8 @@ var editor: Control
 
 var variables = {}
 var lexText = ""
+var predicate = ""
+var yieldType = ""
 
 
 func textChanged(new_text):
@@ -25,3 +27,10 @@ func deleteNode():
 	if editor.curEntry == self:
 		editor.hideEntry()
 	queue_free()
+
+func generateType():
+	var out = "<"
+	for x in variables.keys():
+		out += variables[x].substr(1,-1)
+	out += ",%s>" % yieldType
+	return out
